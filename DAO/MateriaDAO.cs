@@ -1,6 +1,6 @@
 ﻿namespace projetogrupo.DAO
 {
-    public class Material
+    public class MateriaDAO
     {
         public int Id_mat { get; set; }
         public string Nome_mat { get; set; } = string.Empty;

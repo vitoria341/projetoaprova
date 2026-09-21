@@ -10,7 +10,7 @@ builder.Services.AddRazorComponents()
 
 // Configuração da Conexão com o Banco de Dados MySQL
 builder.Services.AddScoped<Conexao>();
-builder.Services.AddScoped<MaterialDAO>();
+builder.Services.AddScoped<MateriaDAO>();
 builder.Services.AddScoped<TopicoDAO>();
 builder.Services.AddScoped<UsuarioDAO>();
 
