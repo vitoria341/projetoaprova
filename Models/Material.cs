@@ -1,6 +1,6 @@
 ﻿namespace projetogrupo.Models
 {
-    public class Materia
+    public class Material
     {
     }
 }
