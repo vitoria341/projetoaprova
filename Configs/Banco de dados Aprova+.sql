@@ -8,7 +8,7 @@ email_usu VARCHAR(100),
 senha_usu VARCHAR(100)
 );
 
-CREATE TABLE materia (
+CREATE TABLE material (
 id_mat INT PRIMARY KEY AUTO_INCREMENT,
 nome_mat VARCHAR(100),
 descricao_mat VARCHAR(200)
