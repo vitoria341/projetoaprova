@@ -1,10 +1,18 @@
 using projetogrupo.Components;
+using projetogrupo.Configs;
+using projetogrupo.DAO;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Configuração da Conexão com o Banco de Dados MySQL
+builder.Services.AddScoped<Conexao>();
+builder.Services.AddScoped<MaterialDAO>();
+builder.Services.AddScoped<TopicoDAO>();
+builder.Services.AddScoped<UsuarioDAO>();
 
 var app = builder.Build();
 
