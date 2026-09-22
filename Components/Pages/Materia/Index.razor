@@ -1,5 +1,48 @@
-﻿<h3>Index</h3>
+﻿@page "/materia"
+@using projetogrupo.Models
+@using projetogrupo.DAO
+@inject MateriaDAO MateriaDAO
+
+<PageTitle>Matérias</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Consulta de Matérias</h2>
+    </div>
+</div>
+
+<div class="custom-table-card">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var Materia in Materias)
+                {
+                    <tr>
+                        <td>@Materia.Id</td>
+                        <td>@Materia.Nome</td>
+                        <td>@Materia.Descricao</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @code {
+    private List<Materia> Materias = new();
 
+    protected override void OnInitialized()
+    {
+        Materias = MateriaDAO.Listar();
+    }
 }

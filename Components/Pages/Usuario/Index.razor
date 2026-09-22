@@ -1,5 +1,50 @@
-﻿<h3>Index</h3>
+﻿@page "/usuario"
+@using projetogrupo.Models
+@using projetogrupo.DAO
+@inject UsuarioDAO UsuarioDAO
+
+<PageTitle>Usuários</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Consulta de Usuários</h2>
+    </div>
+</div>
+
+<div class="custom-table-card">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Senha</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var Usuario in Usuarios)
+                {
+                    <tr>
+                        <td>@Usuario.Id</td>
+                        <td>@Usuario.Nome</td>
+                        <td>@Usuario.Email</td>
+                        <td>@Usuario.Senha</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @code {
+    private List<Usuario> Usuarios = new();
 
+    protected override void OnInitialized()
+    {
+        Usuarios = UsuarioDAO.Listar();
+    }
 }

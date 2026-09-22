@@ -1,5 +1,47 @@
-﻿<h3>Index</h3>
+﻿@page "/topico"
+@using projetogrupo.Models
+@using projetogrupo.DAO
+@inject TopicoDAO TopicoDAO
+
+<PageTitle>Tópicos</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Consulta de Tópicos</h2>
+    </div>
+</div>
+
+<div class="custom-table-card">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Id da Matéria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var Topico in Topicos)
+                {
+                    <tr>
+                        <td>@Topico.Id</td>
+                        <td>@Topico.Nome</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @code {
+    private List<Topico> Topicos = new();
 
+    protected override void OnInitialized()
+    {
+        Topicos = TopicoDAO.Listar();
+    }
 }
