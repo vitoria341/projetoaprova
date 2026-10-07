@@ -39,5 +39,27 @@ namespace projetogrupo.DAO
 
             };
         }
+
+        public void Inserir(Usuario usuario)
+        {
+            try
+            {
+                using var con = _conexao.GetConnection();
+                string sql = @"INSERT INTO usuario (nome_usu, email_usu, senha_usu)
+                VALUES (@nome, @email, @senha)";
+
+                using var comando = con.CreateCommand();
+                comando.CommandText = sql;
+                comando.Parameters.AddWithValue("@nome", usuario.Nome); ;
+                comando.Parameters.AddWithValue("@email", usuario.Email);
+                comando.Parameters.AddWithValue("@senha", usuario.Senha);
+
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

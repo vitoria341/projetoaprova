@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using projetogrupo.Configs;
 using projetogrupo.Models;
+using System.Diagnostics;
 
 namespace projetogrupo.DAO
 {
@@ -36,6 +37,26 @@ namespace projetogrupo.DAO
                 Nome = DAOHelper.GetString(leitor, "nome_top"),
               
             };
+        }
+
+        public void Inserir(Topico topico)
+        {
+            try
+            {
+                using var con = _conexao.GetConnection();
+                string sql = @"INSERT INTO topico (nome_top) 
+                VALUES (@nome)";
+
+                using var comando = con.CreateCommand();
+                comando.CommandText = sql;
+                comando.Parameters.AddWithValue("@nome", topico.Nome); ;
+
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

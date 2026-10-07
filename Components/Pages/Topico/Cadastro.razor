@@ -1,0 +1,58 @@
+﻿@page "/topicos/cadastro"
+@rendermode InteractiveServer
+@using projetogrupo.DAO
+@using projetogrupo.Models
+@inject TopicoDAO TopicoDAO
+@inject NavigationManager NavigationManager
+
+<PageTitle>Novo Tópico - Sistema de Controle</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Cadastro de Tópico</h2>
+    </div>
+</div>
+
+<div class="custom-table-card p-4">
+    <EditForm Model="topico" OnValidSubmit="Salvar">
+        <DataAnnotationsValidator />
+
+        <ValidationSummary class="alert alert-danger" />
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="nome" class="form-label">
+                    Nome
+                </label>
+
+                <InputText id="nome"
+                           class="form-control"
+                           @bind-Value="topico.Nome" />
+
+                <ValidationMessage For="() => topico.Nome" />
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg"></i>
+                Salvar
+            </button>
+
+            <a href="/topico" class="btn btn-light border">
+                Cancelar
+            </a>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private Topico topico = new();
+
+    private void Salvar()
+    {
+        TopicoDAO.Inserir(topico);
+
+        NavigationManager.NavigateTo("/topico");
+    }
+}

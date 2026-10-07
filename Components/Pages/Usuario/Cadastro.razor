@@ -1,0 +1,88 @@
+﻿@page "/usuarios/cadastro"
+@rendermode InteractiveServer
+@using projetogrupo.DAO
+@using projetogrupo.Models
+@inject UsuarioDAO UsuarioDAO
+@inject NavigationManager NavigationManager
+
+<PageTitle>Novo Usuário - Sistema de Controle</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Cadastro de Usuário</h2>
+    </div>
+</div>
+
+<div class="custom-table-card p-4">
+    <EditForm Model="usuario" OnValidSubmit="Salvar">
+        <DataAnnotationsValidator />
+
+        <ValidationSummary class="alert alert-danger" />
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="nome" class="form-label">
+                    Nome
+                </label>
+
+                <InputText id="nome"
+                           class="form-control"
+                           @bind-Value="usuario.Nome" />
+
+                <ValidationMessage For="() => usuario.Nome" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="email" class="form-label">
+                    E-mail
+                </label>
+
+                <InputText id="email"
+                           type="email"
+                           class="form-control"
+                           @bind-Value="usuario.Email" />
+
+                <ValidationMessage For="() => usuario.Email" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="senha" class="form-label">
+                    Senha
+                </label>
+
+                <InputText id="senha"
+                           type="password"
+                           class="form-control"
+                           @bind-Value="usuario.Senha" />
+
+                <ValidationMessage For="() => usuario.Senha" />
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg"></i>
+                Salvar
+            </button>
+
+            <a href="/usuario" class="btn btn-light border">
+                Cancelar
+            </a>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private Usuario usuario = new();
+
+    private void Salvar()
+    {
+        UsuarioDAO.Inserir(usuario);
+
+        NavigationManager.NavigateTo("/usuario");
+    }
+}

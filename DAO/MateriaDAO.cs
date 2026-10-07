@@ -39,6 +39,27 @@ namespace projetogrupo.DAO
                 Descricao = DAOHelper.GetString(leitor, "descricao_mat")
             };
         }
+
+        public void Inserir(Materia materia)
+        {
+            try
+            {
+                using var con = _conexao.GetConnection();
+                string sql = @"INSERT INTO materia (nome_mat, descricao_mat) 
+                VALUES (@nome, @descricao)";
+
+                using var comando = con.CreateCommand();
+                comando.CommandText = sql;
+                comando.Parameters.AddWithValue("@nome", materia.Nome);;
+                comando.Parameters.AddWithValue("@descricao", materia.Descricao);
+
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
    
